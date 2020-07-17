@@ -1,19 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="listaTelefonica">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Lista Telefonica | MyContacts </title>
-    <script src="./javascript/lib/angular.js"></script>
     <link rel="stylesheet" href="./css/style.css">
+    <title> Lista Telefonica | MyContacts </title>
+    <script src="./lib/angular.js"></script>
+    <link rel="stylesheet" href="./lib/bootstrap.css">
     <script>
+    
+    const app=angular.module("listaTelefonica",[]);
+    
+    app.controller("listaT",
+    function ($scope) {
+        $scope.info="ola mundo";
+    
         
+    
+    })
         
         
     </script>
 </head>
-<body>
-    
+<body ng-controller="listaT">
+    <h1 ng-bind="info"></h1>
     <script src="./javascript/main.js"></script>
 </body>
-</html>
+</html> 
