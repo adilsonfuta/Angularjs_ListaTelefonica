@@ -1,29 +1,134 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="listaTelefonica">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
     <title> Lista Telefonica | MyContacts </title>
+
+    <link rel="stylesheet" href="./css/style.css">
     <script src="./lib/angular.js"></script>
     <link rel="stylesheet" href="./lib/bootstrap.css">
+
+
     <script>
-    
-    const app=angular.module("listaTelefonica",[]);
-    
-    app.controller("listaT",
-    function ($scope) {
-        $scope.info="ola mundo";
-    
-        
-    
-    })
-        
-        
+        const app = angular.module("listaTelefonica", []);
+        app.controller("listaT",
+            function ($scope) {
+
+                $scope.info = " Lista Telefonica ";
+
+                $scope.contatos = [
+                    { nome: "Adilson", telefone: "932392875" },
+                    { nome: "Mario", telefone: "912346712" },
+                    { nome: "Erica", telefone: "222459000" },
+                    { nome: "Hilquias", telefone: "934213312" },
+                    { nome: "Filomena", telefone: "222090807" }
+                ];
+
+                $scope.operadoras = [
+                    { codigo: "93", nome: "Unitel", categoria: "Celular" },
+                    { codigo: "91", nome: "Movicel", categoria: "Celular" },
+                    { codigo: "222", nome: "AngolaTelecom", categoria: "Fixa" }
+                ];
+
+                $scope.adicionarcontato = function (contato) {
+                    const cp = angular.copy(contato);
+                    $scope.contatos.push(cp);
+                    delete $scope.contato;
+                }
+
+                $scope.add_classe_cor="selecionado";
+                $scope.add_classe_negrito="negrito";
+
+
+            });
+
+
     </script>
 </head>
+
 <body ng-controller="listaT">
-    <h1 ng-bind="info"></h1>
+   
+    <div class="main-center jumbotron">
+        
+        <h3>{{info+' Jupiter Academy'}}</h3>
+
+        {{contatos}}
+
+        <!-- table-striped-->
+        <table class="table  ">
+            <tr>
+                <th>Ativador</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Operadora</th>
+            </tr>
+            <!--ng-class="[add_classe_cor,add_classe_negrito]" 
+                 -->
+            <tr ng-class="{selecionado: cnt.selecionado }" ng-repeat="cnt in contatos">
+                <td> <input type="checkbox" ng-model="cnt.selecionado"/> </td>
+                <td>{{cnt.nome}}</td>
+                <td>{{cnt.telefone}}</td>
+                <td>{{cnt.operadora.nome}}</td>
+            </tr>
+        </table>
+        <hr>
+
+        <div class="input-box">
+            <input type="text" ng-model="contato.nome" placeholder="Digite Nome" class="form-control">
+            <input type="text" ng-model="contato.telefone" placeholder="Digite Telefone" class="form-control">
+
+            <select ng-model="contato.operadora" class="form-control"
+                ng-options="opera.nome group by opera.categoria for opera in operadoras" id="">
+                <option value="">Selecione a Operadora</option>
+            </select>
+
+
+            <button ng-click="adicionarcontato(contato)" ng-disabled="!contato.nome || !contato.telefone"
+                class="btn btn-primary btn-block"> Adicionar Contacto</button>
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--  incluir ficheiro adicional -->
     <script src="./javascript/main.js"></script>
 </body>
-</html> 
+
+</html>
+
+
+
+
+
+
+
+<!--
+
+     <h1 ng-bind="info"></h1>  
+            <tr ng-repeat="cnt in contatos">
+                <td ng-repeat="(key,value) in cnt" >
+                        {{value}}
+                </td>
+            </tr>
+
+                <label for="">{{nome}}</label>
+        <label for=""> {{telefone}}</label> 
+            -->

@@ -2,6 +2,37 @@
     box-sizing: border-box;
 }
 
-body{
-    background: #f4f4f4;
+.main-center{
+    max-width: 600px;
+    text-align: center;
+    margin: 20px auto  0  auto;
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+
+.main-center h3{
+    text-align: center;
+    margin-bottom: 20px;
+    color: coral;
+    font-weight: bold;
+}
+
+.main-center table th{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+
+.input-box input, button{
+    margin-bottom: 8px;
+}
+
+/*adicionado pelo ng-class */
+.selecionado{
+    background: yellow;
+}
+
+.negrito{
+    color:#000;
+    font-weight: bold;
 }
