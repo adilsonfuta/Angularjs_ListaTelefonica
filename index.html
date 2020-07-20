@@ -19,11 +19,11 @@
                 $scope.info = " Lista Telefonica ";
 
                 $scope.contatos = [
-                    { nome: "Adilson", telefone: "932392875" },
-                    { nome: "Mario", telefone: "912346712" },
-                    { nome: "Erica", telefone: "222459000" },
-                    { nome: "Hilquias", telefone: "934213312" },
-                    { nome: "Filomena", telefone: "222090807" }
+                    { nome: "Adilson", telefone: "932392875" , cor:"cyan"},
+                    { nome: "Mario", telefone: "912346712" , cor:"purple"},
+                    { nome: "Erica", telefone: "222459000", cor:"oragen" },
+                    { nome: "Hilquias", telefone: "934213312", cor:"teal" },
+                    { nome: "Filomena", telefone: "222090807", cor:"red" }
                 ];
 
                 $scope.operadoras = [
@@ -66,8 +66,8 @@
         
         <h3>{{info+' Jupiter Academy'}}</h3>
 
-        <!-- table-striped-->
-        <table class="table  ">
+        <!-- table-stripe retirar para poder selecionar todos amarelos -->
+        <table class="table table-striped" ng-show="contatos.length>0" >
             <tr>
                 <th>Ativador</th>
                 <th>Nome</th>
@@ -82,7 +82,7 @@
                 <td>{{cnt.nome}}</td>
                 <td>{{cnt.telefone}}</td>
                 <td>{{cnt.operadora.nome}}</td>
-                <td> <div class="basicos"></div> </td>
+                <td> <div class="basicos" ng-style="{'background-color' : cnt.cor}"></div> </td>
             </tr>
         </table>
         <hr>
@@ -100,39 +100,20 @@
             <button ng-click="adicionarcontato(contato)" ng-disabled="!contato.nome || !contato.telefone"
                 class="btn btn-primary btn-block"> Adicionar Contacto</button>
                 
-                <button ng-click="ApagarContatos(contatos)" ng-disabled="!iscontatoSel(contatos)"
+                <button ng-click="ApagarContatos(contatos)" ng-if="iscontatoSel(contatos)"
                 class="btn btn-danger btn-block"> Eliminar Contacto</button>
         </div>
 
-
-
-
-
+            <!-- adicionando elemento externo ng-include -->
+        <div ng-include=" 'footer.html' "></div>
 
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!--  incluir ficheiro adicional -->
     <script src="./javascript/main.js"></script>
 </body>
 
 </html>
-
-
-
-
-
 
 
 <!--
