@@ -36,7 +36,19 @@
                     const cp = angular.copy(contato);
                     $scope.contatos.push(cp);
                     delete $scope.contato;
-                }
+                };
+
+                $scope.ApagarContatos=function(contatos){
+                    $scope.contatos=contatos.filter(function (contato){
+                        if(!contato.selecionado)  return contato;
+                   });
+                };
+
+                $scope.iscontatoSel=function(contatos){
+                   return contatos.some(function (contato){
+                        return contato.selecionado;
+                   });
+                };
 
                 $scope.add_classe_cor="selecionado";
                 $scope.add_classe_negrito="negrito";
@@ -61,6 +73,7 @@
                 <th>Nome</th>
                 <th>Telefone</th>
                 <th>Operadora</th>
+                <th>Cor Favorita</th>
             </tr>
             <!--ng-class="[add_classe_cor,add_classe_negrito]" 
                  -->
@@ -69,6 +82,7 @@
                 <td>{{cnt.nome}}</td>
                 <td>{{cnt.telefone}}</td>
                 <td>{{cnt.operadora.nome}}</td>
+                <td> <div class="basicos"></div> </td>
             </tr>
         </table>
         <hr>
@@ -85,6 +99,9 @@
 
             <button ng-click="adicionarcontato(contato)" ng-disabled="!contato.nome || !contato.telefone"
                 class="btn btn-primary btn-block"> Adicionar Contacto</button>
+                
+                <button ng-click="ApagarContatos(contatos)" ng-disabled="!iscontatoSel(contatos)"
+                class="btn btn-danger btn-block"> Eliminar Contacto</button>
         </div>
 
 
@@ -129,4 +146,15 @@
 
                 <label for="">{{nome}}</label>
         <label for=""> {{telefone}}</label> 
+
+
+
+        // usando no controler para seleciona um contato pela check e listar eles 
+
+          $scope.ApagarContatos=function(contatos){
+                    const selContato=contatos.filter(function (contato){
+                        if(contato.selecionado)  return contato;
+                   });
+                   console.log(selContato);
+                };
             -->
