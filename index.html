@@ -36,7 +36,7 @@
                     const cp = angular.copy(contato);
                     $scope.contatos.push(cp);
                     delete $scope.contato;
-                        $scope.contatoForm.$setPristine();
+                    $scope.contatoForm.$setPristine();
                 };
 
                 $scope.ApagarContatos = function (contatos) {
@@ -95,8 +95,8 @@
             <form action="" name="contatoForm">
                 <input type="text" ng-model="contato.nome" name="nomeInp" placeholder="Digite Nome" class="form-control"
                     ng-required="true" ng-minlength="10">
-                <input type="text" ng-model="contato.telefone" name="telefoneInp" placeholder="Digite Telefone" class="form-control"
-                    ng-required="true">
+                <input type="text" ng-model="contato.telefone" name="telefoneInp" placeholder="Digite Telefone"
+                    class="form-control" ng-required="true" ng-pattern="/^\d{9,12}$/">
 
                 <select ng-model="contato.operadora" class="form-control"
                     ng-options="opera.nome group by opera.categoria for opera in operadoras" id="">
@@ -105,19 +105,27 @@
             </form>
 
             <br>
-            <div class="alert alert-danger"
-             ng-show="contatoForm.nomeInp.$invalid && contatoForm.nomeInp.$dirty" >
-                Por favor Preencher o Nome   
+
+            <div ng-messages="contatoForm.nomeInp.$error" class="alert alert-danger">
+                <div ng-message="required">
+                    Por favor Preencher o Nome
+                </div>
+                <div ng-show="minlength">
+                    Preencher devidamente com ate 10 Letras
+                </div>
             </div>
-            <div class="alert alert-danger"
-             ng-show="contatoForm.nomeInp.$invalid && contatoForm.nomeInp.$dirty" >
-                Preencher devidamente com ate 10 Letras   
+
+            <div ng-messages="contatoForm.telefoneInp.$error" class="alert alert-danger">
+                <div ng-message="required">
+                    Por favor Preencher o Telefone
+                </div>
+
+                <div ng-show="pattern">
+                    Preencher o Telefone assim DDDXXXNNN ou 244DDDXXXNNN
+                </div>
             </div>
-            <div class="alert alert-danger"
-             ng-show="contatoForm.telefoneInp.$invalid && contatoForm.telefoneInp.$dirty">
-                Por favor Preencher o Telefone  
-            </div>
-         
+            
+
             <button ng-click="adicionarcontato(contato)" ng-disabled="contatoForm.$invalid"
                 class="btn btn-primary btn-block"> Adicionar Contacto</button>
 
@@ -159,8 +167,9 @@
                 </div>
                     //ng-disabled="!contato.nome || !contato.telefone"
 
-        // usando no controler para seleciona um contato pela check e listar eles 
+                    //  /^\d{9,13}$/  932392875    
 
+        // usando no controler para seleciona um contato pela check e listar eles 
           $scope.ApagarContatos=function(contatos){
                     const selContato=contatos.filter(function (contato){
                         if(contato.selecionado)  return contato;
