@@ -8,22 +8,38 @@
 
     <link rel="stylesheet" href="./css/style.css">
     <script src="./lib/angular.js"></script>
+    <script src="./lib/angular-messages.js"></script>
     <link rel="stylesheet" href="./lib/bootstrap.css">
 
 
     <script>
-        const app = angular.module("listaTelefonica", []);
+        const app = angular.module("listaTelefonica", ["ngMessages"]);
         app.controller("listaT",
             function ($scope) {
 
                 $scope.info = " Lista Telefonica ";
 
                 $scope.contatos = [
-                    { nome: "Adilson", telefone: "932392875", cor: "cyan" },
-                    { nome: "Mario", telefone: "912346712", cor: "purple" },
-                    { nome: "Erica", telefone: "222459000", cor: "oragen" },
-                    { nome: "Hilquias", telefone: "934213312", cor: "teal" },
-                    { nome: "Filomena", telefone: "222090807", cor: "red" }
+                    {
+                        nome: "Adilson", telefone: "932392875", cor: "cyan", data: new Date(),
+                        operadora: { codigo: "93", nome: "Unitel", categoria: "Celular" }
+                    },
+                    {
+                        nome: "Mario", telefone: "912346712", cor: "purple", data: new Date(),
+                        operadora: { codigo: "91", nome: "Movicel", categoria: "Celular" }
+                    },
+                    {
+                        nome: "Erica", telefone: "222459000", cor: "oragen",data: new Date(),
+                        operadora: { codigo: "222", nome: "AngolaTelecom", categoria: "Fixa" }
+                    },
+                    {
+                        nome: "Hilquias", telefone: "934213312", cor: "teal", data: new Date(),
+                        operadora: { codigo: "93", nome: "Unitel", categoria: "Celular" }
+                    },
+                    {
+                        nome: "Filomena", telefone: "222090807", cor: "red", data: new Date(),
+                        operadora: { codigo: "222", nome: "AngolaTelecom", categoria: "Fixa" }
+                    }
                 ];
 
                 $scope.operadoras = [
@@ -53,6 +69,10 @@
 
                 $scope.add_classe_cor = "selecionado";
                 $scope.add_classe_negrito = "negrito";
+                $scope.falha1 = "Por favor Preencher o Nome";
+                $scope.falha2 = "Preencher devidamente com ate 10 Letras";
+                $scope.falha3 = "Por favor Preencher o Telefone";
+                $scope.falha4 = " Preencher o Telefone assim DDDXXXNNN ou 244DDDXXXNNN";
 
 
             });
@@ -106,25 +126,26 @@
 
             <br>
 
-            <div ng-messages="contatoForm.nomeInp.$error" class="alert alert-danger">
-                <div ng-message="required">
-                    Por favor Preencher o Nome
+            <div ng-messages="contatoForm.nomeInp.$error " class="alert alert-danger">
+                <div ng-message="required && $dirty">
+                    {{falha1 | uppercase }}
                 </div>
-                <div ng-show="minlength">
-                    Preencher devidamente com ate 10 Letras
+                <div ng-message="minlength && $dirty">
+                    {{falha2 | lowercase }}
                 </div>
             </div>
 
-            <div ng-messages="contatoForm.telefoneInp.$error" class="alert alert-danger">
-                <div ng-message="required">
-                    Por favor Preencher o Telefone
-                </div>
 
-                <div ng-show="pattern">
-                    Preencher o Telefone assim DDDXXXNNN ou 244DDDXXXNNN
-                </div>
+            <div ng-show="contatoForm.telefoneInp.$error.required && 
+                contatoForm.telefoneInp.$dirty" class="alert alert-danger">
+                {{falha3}}
             </div>
-            
+
+            <div ng-show="contatoForm.telefoneInp.$error.pattern" class="alert alert-danger">
+                {{falha4}}
+            </div>
+
+
 
             <button ng-click="adicionarcontato(contato)" ng-disabled="contatoForm.$invalid"
                 class="btn btn-primary btn-block"> Adicionar Contacto</button>
