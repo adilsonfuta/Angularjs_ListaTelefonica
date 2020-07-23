@@ -87,6 +87,9 @@
 
         <h3>{{info+' Jupiter Academy'}}</h3>
 
+        <input id="procurarInfo" type="text" name="search" ng-model="criteriodeBusca"
+         placeholder="Search.." class="form-control">
+
         <!-- table-stripe retirar para poder selecionar todos amarelos -->
         <table class="table table-striped" ng-show="contatos.length>0">
             <tr>
@@ -95,10 +98,11 @@
                 <th>Telefone</th>
                 <th>Operadora</th>
                 <th>Cor Favorita</th>
+                <th>Data</th>
             </tr>
             <!--ng-class="[add_classe_cor,add_classe_negrito]" 
                  -->
-            <tr ng-class="{'selecionado negrito': cnt.selecionado }" ng-repeat="cnt in contatos">
+            <tr ng-class="{'selecionado negrito': cnt.selecionado }" ng-repeat="cnt in contatos | filter: criteriodeBusca">
                 <td> <input type="checkbox" ng-model="cnt.selecionado" /> </td>
                 <td>{{cnt.nome}}</td>
                 <td>{{cnt.telefone}}</td>
@@ -106,6 +110,7 @@
                 <td>
                     <div class="basicos" ng-style="{'background-color' : cnt.cor}"></div>
                 </td>
+                <td>{{cnt.data | date: 'dd/MM/yyyy HH:MM' }}</td>
             </tr>
         </table>
         <hr>
