@@ -19,11 +19,11 @@
                 $scope.info = " Lista Telefonica ";
 
                 $scope.contatos = [
-                    { nome: "Adilson", telefone: "932392875" , cor:"cyan"},
-                    { nome: "Mario", telefone: "912346712" , cor:"purple"},
-                    { nome: "Erica", telefone: "222459000", cor:"oragen" },
-                    { nome: "Hilquias", telefone: "934213312", cor:"teal" },
-                    { nome: "Filomena", telefone: "222090807", cor:"red" }
+                    { nome: "Adilson", telefone: "932392875", cor: "cyan" },
+                    { nome: "Mario", telefone: "912346712", cor: "purple" },
+                    { nome: "Erica", telefone: "222459000", cor: "oragen" },
+                    { nome: "Hilquias", telefone: "934213312", cor: "teal" },
+                    { nome: "Filomena", telefone: "222090807", cor: "red" }
                 ];
 
                 $scope.operadoras = [
@@ -36,22 +36,23 @@
                     const cp = angular.copy(contato);
                     $scope.contatos.push(cp);
                     delete $scope.contato;
+                        $scope.contatoForm.$setPristine();
                 };
 
-                $scope.ApagarContatos=function(contatos){
-                    $scope.contatos=contatos.filter(function (contato){
-                        if(!contato.selecionado)  return contato;
-                   });
+                $scope.ApagarContatos = function (contatos) {
+                    $scope.contatos = contatos.filter(function (contato) {
+                        if (!contato.selecionado) return contato;
+                    });
                 };
 
-                $scope.iscontatoSel=function(contatos){
-                   return contatos.some(function (contato){
+                $scope.iscontatoSel = function (contatos) {
+                    return contatos.some(function (contato) {
                         return contato.selecionado;
-                   });
+                    });
                 };
 
-                $scope.add_classe_cor="selecionado";
-                $scope.add_classe_negrito="negrito";
+                $scope.add_classe_cor = "selecionado";
+                $scope.add_classe_negrito = "negrito";
 
 
             });
@@ -61,13 +62,13 @@
 </head>
 
 <body ng-controller="listaT">
-   
+
     <div class="main-center jumbotron">
-        
+
         <h3>{{info+' Jupiter Academy'}}</h3>
 
         <!-- table-stripe retirar para poder selecionar todos amarelos -->
-        <table class="table table-striped" ng-show="contatos.length>0" >
+        <table class="table table-striped" ng-show="contatos.length>0">
             <tr>
                 <th>Ativador</th>
                 <th>Nome</th>
@@ -78,37 +79,56 @@
             <!--ng-class="[add_classe_cor,add_classe_negrito]" 
                  -->
             <tr ng-class="{'selecionado negrito': cnt.selecionado }" ng-repeat="cnt in contatos">
-                <td> <input type="checkbox" ng-model="cnt.selecionado"/> </td>
+                <td> <input type="checkbox" ng-model="cnt.selecionado" /> </td>
                 <td>{{cnt.nome}}</td>
                 <td>{{cnt.telefone}}</td>
                 <td>{{cnt.operadora.nome}}</td>
-                <td> <div class="basicos" ng-style="{'background-color' : cnt.cor}"></div> </td>
+                <td>
+                    <div class="basicos" ng-style="{'background-color' : cnt.cor}"></div>
+                </td>
             </tr>
         </table>
         <hr>
 
         <div class="input-box">
-            <input type="text" ng-model="contato.nome" placeholder="Digite Nome" class="form-control">
-            <input type="text" ng-model="contato.telefone" placeholder="Digite Telefone" class="form-control">
 
-            <select ng-model="contato.operadora" class="form-control"
-                ng-options="opera.nome group by opera.categoria for opera in operadoras" id="">
-                <option value="">Selecione a Operadora</option>
-            </select>
+            <form action="" name="contatoForm">
+                <input type="text" ng-model="contato.nome" name="nomeInp" placeholder="Digite Nome" class="form-control"
+                    ng-required="true" ng-minlength="10">
+                <input type="text" ng-model="contato.telefone" name="telefoneInp" placeholder="Digite Telefone" class="form-control"
+                    ng-required="true">
 
+                <select ng-model="contato.operadora" class="form-control"
+                    ng-options="opera.nome group by opera.categoria for opera in operadoras" id="">
+                    <option value="">Selecione a Operadora</option>
+                </select>
+            </form>
 
-            <button ng-click="adicionarcontato(contato)" ng-disabled="!contato.nome || !contato.telefone"
+            <br>
+            <div class="alert alert-danger"
+             ng-show="contatoForm.nomeInp.$invalid && contatoForm.nomeInp.$dirty" >
+                Por favor Preencher o Nome   
+            </div>
+            <div class="alert alert-danger"
+             ng-show="contatoForm.nomeInp.$invalid && contatoForm.nomeInp.$dirty" >
+                Preencher devidamente com ate 10 Letras   
+            </div>
+            <div class="alert alert-danger"
+             ng-show="contatoForm.telefoneInp.$invalid && contatoForm.telefoneInp.$dirty">
+                Por favor Preencher o Telefone  
+            </div>
+         
+            <button ng-click="adicionarcontato(contato)" ng-disabled="contatoForm.$invalid"
                 class="btn btn-primary btn-block"> Adicionar Contacto</button>
-                
-                <button ng-click="ApagarContatos(contatos)" ng-if="iscontatoSel(contatos)"
-                class="btn btn-danger btn-block"> Eliminar Contacto</button>
+
+            <button ng-click="ApagarContatos(contatos)" ng-if="iscontatoSel(contatos)" class="btn btn-danger btn-block">
+                Eliminar Contacto</button>
         </div>
 
-            <!-- adicionando elemento externo ng-include -->
+        <!-- adicionando elemento externo ng-include -->
         <div ng-include=" 'footer.html' "></div>
 
     </div>
-
     <!--  incluir ficheiro adicional -->
     <script src="./javascript/main.js"></script>
 </body>
@@ -116,9 +136,14 @@
 </html>
 
 
-<!--
 
-     <h1 ng-bind="info"></h1>  
+
+
+
+
+
+<!--
+         <h1 ng-bind="info"></h1>  
             <tr ng-repeat="cnt in contatos">
                 <td ng-repeat="(key,value) in cnt" >
                         {{value}}
@@ -128,7 +153,11 @@
                 <label for="">{{nome}}</label>
         <label for=""> {{telefone}}</label> 
 
-
+              
+                <div class="alert alert-danger" ng-show="contatoForm.$invalid">
+                    Por favor Preencher os Nome e Telefone  
+                </div>
+                    //ng-disabled="!contato.nome || !contato.telefone"
 
         // usando no controler para seleciona um contato pela check e listar eles 
 
