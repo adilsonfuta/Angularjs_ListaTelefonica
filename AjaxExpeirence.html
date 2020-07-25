@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax teste </title>
+    <script src="">     
+
+        const baseurl = 'http://localhost:3000/contatos';
+       
+        const get = function (url, callback) {
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 ) {
+                        callback(xhr.responseText, xhr.status);
+                    }
+                };
+                xhr.open('GET', url);
+                xhr.send(null);
+            }
+        
+    document.getElementById('btn1').addEventListener('click', 
+    CarregarListaContatos);
+    
+    function CarregarListaContatos(e) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', baseurl, true);
+    xhr.onload = function () {
+        if (this.status === 200) {            
+            let valores = JSON.parse(this.responseText);
+            let saida = '';            
+            console.log(this.responseText);
+            console.log(valores);              
+
+       }
+    }
+    xhr.send();
+}
+
+
+
+          /*  for( let v in valores){
+                    saida+= '<ul>'+
+                    '<li>ID: ' +valores[v].id+ '</li>' +
+                   ' <li>Nome: '+valores[v].nome+ '</li> '+
+                   ' <li>Telefone: ' +valores[v].telefone + '</li>'+
+                   ' <li>Data:  ' +valores[v].data+ '</li>' +
+                    '</ul> ';                    
+                   }
+            document.getElementById('cnt2').innerHTML = saida; */
+
+     /*  valores.forEach((v) => {            
+                saida += `
+                <ul>
+                <li>ID: ${v.id} </li>
+                <li>Nome: ${v.nome} </li>
+                <li>Telefone: ${v.telefone} </li>
+                <li>Data:  ${v.data}</li>
+                </ul>                       
+               `;
+            }); */
+
+
+
+    </script>
+</head>
+
+<body>
+
+
+    <button id="btn1">Clique aqui </button>
+    <div class="ajax" id="teste">
+
+    </div>
+
+    <div  id="cnt2">
+    </div>
+</body>
+
+</html>
