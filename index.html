@@ -19,28 +19,39 @@
             $scope.info = " Lista Telefonica ";
             $scope.contatos = [];
             $scope.operadoras = [
-               ];
+            ];
 
             let carregarContatos = function () {
                 $http.get("http://localhost:3000/contatos").then(
                     function (response) {
-                        $scope.contatos =response.data;
-                    });
+                        $scope.contatos = response.data;
+                    },
+                    function (response) {            
+                        $scope.mensagem = "Aconteceu ALgo de Errado Nao consigo carregar nada ";
+                    }
+                );
+
+                // politica da mesma origem jsonp ou CORS (Cabecalho http)
 
             };
+
+
             let CarregarOperadoras = function () {
                 $http.get("http://localhost:3000/operadoras").then(
                     function (response) {
-                        $scope.operadoras =response.data;
+                        $scope.operadoras = response.data;
                     });
 
             };
 
             $scope.adicionarcontato = function (contato) {
-                const cp = angular.copy(contato);
-                $scope.contatos.push(cp);
-                delete $scope.contato;
-                $scope.contatoForm.$setPristine();
+                contato.data = new Date();
+                $http.post("http://localhost:3000/contatos", contato).then(
+                    function (response) {
+                        delete $scope.contato;
+                        $scope.contatoForm.$setPristine();
+                        carregarContatos();
+                    });
             };
 
             $scope.ApagarContatos = function (contatos) {
@@ -83,6 +94,8 @@
 
         <input id="procurarInfo" type="text" name="search" ng-model="criteriodeBusca" placeholder="Search.."
             class="form-control">
+
+            <ul>{{mensagem}}</ul>
 
         <!-- table-stripe retirar para poder selecionar todos amarelos -->
         <table class="table table-striped" ng-show="contatos.length > 0 ">
