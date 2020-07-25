@@ -14,73 +14,62 @@
 
     <script>
         const app = angular.module("listaTelefonica", ["ngMessages"]);
-        app.controller("listaT",
-            function ($scope) {
+        app.controller("listaT", function ($scope, $http) {
 
-                $scope.info = " Lista Telefonica ";
-                
-                $scope.contatos = [
-                    {
-                        nome: "Adilson", telefone: "932392875", cor: "cyan", data: new Date(),
-                        operadora: { codigo: "93", nome: "Unitel", categoria: "Celular" }
-                    },
-                    {
-                        nome: "Mario", telefone: "912346712", cor: "purple", data: new Date(),
-                        operadora: { codigo: "91", nome: "Movicel", categoria: "Celular" }
-                    },
-                    {
-                        nome: "Erica", telefone: "222459000", cor: "oragen",data: new Date(),
-                        operadora: { codigo: "222", nome: "AngolaTelecom", categoria: "Fixa" }
-                    },
-                    {
-                        nome: "Hilquias", telefone: "934213312", cor: "teal", data: new Date(),
-                        operadora: { codigo: "93", nome: "Unitel", categoria: "Celular" }
-                    },
-                    {
-                        nome: "Filomena", telefone: "222090807", cor: "red", data: new Date(),
-                        operadora: { codigo: "222", nome: "AngolaTelecom", categoria: "Fixa" }
-                    }
-                ];
+            $scope.info = " Lista Telefonica ";
+            $scope.contatos = [];
+            $scope.operadoras = [
+               ];
 
-                $scope.operadoras = [
-                    { codigo: "93", nome: "Unitel", categoria: "Celular", preco:7},
-                    { codigo: "91", nome: "Movicel", categoria: "Celular",preco:10 },
-                    { codigo: "222", nome: "AngolaTelecom", categoria: "Fixa",preco:4 }
-                ];
-
-                $scope.adicionarcontato = function (contato) {
-                    const cp = angular.copy(contato);
-                    $scope.contatos.push(cp);
-                    delete $scope.contato;
-                    $scope.contatoForm.$setPristine();
-                };
-
-                $scope.ApagarContatos = function (contatos) {
-                    $scope.contatos = contatos.filter(function (contato) {
-                        if (!contato.selecionado) return contato;
+            let carregarContatos = function () {
+                $http.get("http://localhost:3000/contatos").then(
+                    function (response) {
+                        $scope.contatos =response.data;
                     });
-                };
 
-                $scope.iscontatoSel = function (contatos) {
-                    return contatos.some(function (contato) {
-                        return contato.selecionado;
+            };
+            let CarregarOperadoras = function () {
+                $http.get("http://localhost:3000/operadoras").then(
+                    function (response) {
+                        $scope.operadoras =response.data;
                     });
-                };
 
-                $scope.ordenarPor=function (campo){
-                    $scope.VALOR_PARA_ORDENAR=campo; 
-                    $scope.SentidoOrdenar=!$scope.SentidoOrdenar;
-                }
+            };
 
-                $scope.add_classe_cor = "selecionado";
-                $scope.add_classe_negrito = "negrito";
-                $scope.falha1 = "Por favor Preencher o Nome";
-                $scope.falha2 = "Preencher devidamente com ate 10 Letras";
-                $scope.falha3 = "Por favor Preencher o Telefone";
-                $scope.falha4 = " Preencher o Telefone assim DDDXXXNNN ou 244DDDXXXNNN";
+            $scope.adicionarcontato = function (contato) {
+                const cp = angular.copy(contato);
+                $scope.contatos.push(cp);
+                delete $scope.contato;
+                $scope.contatoForm.$setPristine();
+            };
 
+            $scope.ApagarContatos = function (contatos) {
+                $scope.contatos = contatos.filter(function (contato) {
+                    if (!contato.selecionado) return contato;
+                });
+            };
 
-            });
+            $scope.iscontatoSel = function (contatos) {
+                return contatos.some(function (contato) {
+                    return contato.selecionado;
+                });
+            };
+
+            $scope.ordenarPor = function (campo) {
+                $scope.VALOR_PARA_ORDENAR = campo;
+                $scope.SentidoOrdenar = !$scope.SentidoOrdenar;
+            }
+
+            $scope.add_classe_cor = "selecionado";
+            $scope.add_classe_negrito = "negrito";
+            $scope.falha1 = "Por favor Preencher o Nome";
+            $scope.falha2 = "Preencher devidamente com ate 10 Letras";
+            $scope.falha3 = "Por favor Preencher o Telefone";
+            $scope.falha4 = " Preencher o Telefone assim DDDXXXNNN ou 244DDDXXXNNN";
+
+            carregarContatos();
+            CarregarOperadoras();
+        });
 
 
     </script>
@@ -92,8 +81,8 @@
 
         <h3>{{info+' Jupiter Academy'}}</h3>
 
-        <input id="procurarInfo" type="text" name="search" ng-model="criteriodeBusca"
-         placeholder="Search.." class="form-control">
+        <input id="procurarInfo" type="text" name="search" ng-model="criteriodeBusca" placeholder="Search.."
+            class="form-control">
 
         <!-- table-stripe retirar para poder selecionar todos amarelos -->
         <table class="table table-striped" ng-show="contatos.length > 0 ">
@@ -102,20 +91,20 @@
                 <th> <a href="" ng-click="ordenarPor('nome')">Nome</a> </th>
                 <th> <a href="" ng-click="ordenarPor('telefone')">Telefone</a> </th>
                 <th> <a href="" ng-click="ordenarPor('operadora')">Operadora</a> </th>
-                <th>Cor Favorita</th>
+                <!--  <th>Cor Favorita</th> -->
                 <th>Data</th>
             </tr>
             <!--ng-class="[add_classe_cor,add_classe_negrito]" 
                  ng-repeat="cnt in contatos | filter: {nome:criteriodeBusca}  -->
             <tr ng-class="{'selecionado negrito': cnt.selecionado }"
-             ng-repeat="cnt in contatos | filter: criteriodeBusca | orderBy:VALOR_PARA_ORDENAR:SentidoOrdenar">
+                ng-repeat=" cnt in contatos | filter: criteriodeBusca | orderBy:VALOR_PARA_ORDENAR:SentidoOrdenar | limitTo:20 ">
                 <td> <input type="checkbox" ng-model="cnt.selecionado" /> </td>
                 <td>{{cnt.nome}}</td>
                 <td>{{cnt.telefone}}</td>
-                <td>{{cnt.operadora.nome}}</td>
-                <td>
+                <td>{{cnt.Operadora.nome}}</td>
+                <!--  <td>
                     <div class="basicos" ng-style="{'background-color' : cnt.cor}"></div>
-                </td>
+                </td> -->
                 <td>{{cnt.data | date:'dd/MM/yyyy HH:MM' }}</td>
             </tr>
         </table>
@@ -126,11 +115,12 @@
             <form action="" name="contatoForm">
                 <input type="text" ng-model="contato.nome" name="nomeInp" placeholder="Digite Nome" class="form-control"
                     ng-required="true" ng-minlength="10">
-                <input type="text" ng-model="contato.telefone" name="telefoneInp" placeholder="Digite Telefone"
+                <input type="number" ng-model="contato.telefone" name="telefoneInp" placeholder="Digite Telefone"
                     class="form-control" ng-required="true" ng-pattern="/^\d{9,12}$/">
 
-                <select ng-model="contato.operadora" class="form-control"
-                    ng-options="opera.nome +' (' + (opera.preco | currency) + ')'  group by opera.categoria  for opera in operadoras | orderBy: 'nome' " id="">
+                <select ng-model="contato.Operadora" class="form-control"
+                    ng-options="opera.nome +' (' + (opera.preco | currency) + ')'  group by opera.categoria  for opera in operadoras | orderBy: 'nome' "
+                    id="">
                     <option value="">Selecione a Operadora</option>
                 </select>
             </form>

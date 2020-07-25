@@ -1,0 +1,22 @@
+{
+  "name": "angularjs_listatelefonica",
+  "version": "1.0.0",
+  "description": "Meu Primeiro Projecto Angular",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adilsonfuta/Angularjs_ListaTelefonica.git"
+  },
+  "author": "Adilson Futa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adilsonfuta/Angularjs_ListaTelefonica/issues"
+  },
+  "homepage": "https://github.com/adilsonfuta/Angularjs_ListaTelefonica#readme"
+}

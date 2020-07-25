@@ -1,0 +1,29 @@
+ $scope.contatos = [
+                    {
+                        nome: "Adilson", telefone: "932392875", cor: "cyan", data: new Date(),
+                        operadora: { codigo: "93", nome: "Unitel", categoria: "Celular" }
+                    },
+                    {
+                        nome: "Mario", telefone: "912346712", cor: "purple", data: new Date(),
+                        operadora: { codigo: "91", nome: "Movicel", categoria: "Celular" }
+                    },
+                    {
+                        nome: "Erica", telefone: "222459000", cor: "oragen",data: new Date(),
+                        operadora: { codigo: "222", nome: "AngolaTelecom", categoria: "Fixa" }
+                    },
+                    {
+                        nome: "Hilquias", telefone: "934213312", cor: "teal", data: new Date(),
+                        operadora: { codigo: "93", nome: "Unitel", categoria: "Celular" }
+                    },
+                    {
+                        nome: "Filomena", telefone: "222090807", cor: "red", data: new Date(),
+                        operadora: { codigo: "222", nome: "AngolaTelecom", categoria: "Fixa" }
+                    }
+                ];
+
+
+                  $scope.operadoras = [
+                { codigo: "93", nome: "Unitel", categoria: "Celular", preco: 7 },
+                { codigo: "91", nome: "Movicel", categoria: "Celular", preco: 10 },
+                { codigo: "222", nome: "AngolaTelecom", categoria: "Fixa", preco: 4 }
+            ];
