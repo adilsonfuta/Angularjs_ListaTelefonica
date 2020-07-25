@@ -7,86 +7,18 @@
     <title> Lista Telefonica | MyContacts </title>
 
     <link rel="stylesheet" href="./css/style.css">
-    <script src="./lib/angular.js"></script>
-    <script src="./lib/angular-messages.js"></script>
     <link rel="stylesheet" href="./lib/bootstrap.css">
 
-
-    <script>
-        const app = angular.module("listaTelefonica", ["ngMessages"]);
-        app.controller("listaT", function ($scope, $http) {
-
-            $scope.info = " Lista Telefonica ";
-            $scope.contatos = [];
-            $scope.operadoras = [
-            ];
-
-            let carregarContatos = function () {
-                $http.get("http://localhost:3000/contatos").then(
-                    function (response) {
-                        $scope.contatos = response.data;
-                    },
-                    function (response) {            
-                        $scope.mensagem = "Aconteceu ALgo de Errado Nao consigo carregar nada ";
-                    }
-                );
-
-                // politica da mesma origem jsonp ou CORS (Cabecalho http)
-
-            };
+    <script src="./lib/angular.js"></script>
+    <script src="./javascript/app.js"></script>
+    <script src="./javascript/controller/listaTelefonicaController.js"></script>
+    <script src="./lib/angular-messages.js"></script>
 
 
-            let CarregarOperadoras = function () {
-                $http.get("http://localhost:3000/operadoras").then(
-                    function (response) {
-                        $scope.operadoras = response.data;
-                    });
-
-            };
-
-            $scope.adicionarcontato = function (contato) {
-                contato.data = new Date();
-                $http.post("http://localhost:3000/contatos", contato).then(
-                    function (response) {
-                        delete $scope.contato;
-                        $scope.contatoForm.$setPristine();
-                        carregarContatos();
-                    });
-            };
-
-            $scope.ApagarContatos = function (contatos) {
-                $scope.contatos = contatos.filter(function (contato) {
-                    if (!contato.selecionado) return contato;
-                });
-            };
-
-            $scope.iscontatoSel = function (contatos) {
-                return contatos.some(function (contato) {
-                    return contato.selecionado;
-                });
-            };
-
-            $scope.ordenarPor = function (campo) {
-                $scope.VALOR_PARA_ORDENAR = campo;
-                $scope.SentidoOrdenar = !$scope.SentidoOrdenar;
-            }
-
-            $scope.add_classe_cor = "selecionado";
-            $scope.add_classe_negrito = "negrito";
-            $scope.falha1 = "Por favor Preencher o Nome";
-            $scope.falha2 = "Preencher devidamente com ate 10 Letras";
-            $scope.falha3 = "Por favor Preencher o Telefone";
-            $scope.falha4 = " Preencher o Telefone assim DDDXXXNNN ou 244DDDXXXNNN";
-
-            carregarContatos();
-            CarregarOperadoras();
-        });
-
-
-    </script>
+   
 </head>
 
-<body ng-controller="listaT">
+<body ng-controller="listaTelefonicaController">
 
     <div class="main-center jumbotron">
 
@@ -168,11 +100,9 @@
                 Eliminar Contacto</button>
         </div>
         <!-- adicionando elemento externo ng-include -->
-        <div ng-include=" 'footer.html' "></div>
+        <div ng-include=" 'View/footer.html' "></div>
 
     </div>
-    <!--  incluir ficheiro adicional -->
-    <script src="./javascript/main.js"></script>
 </body>
 
 </html>
