@@ -43,9 +43,9 @@
                 ];
 
                 $scope.operadoras = [
-                    { codigo: "93", nome: "Unitel", categoria: "Celular" },
-                    { codigo: "91", nome: "Movicel", categoria: "Celular" },
-                    { codigo: "222", nome: "AngolaTelecom", categoria: "Fixa" }
+                    { codigo: "93", nome: "Unitel", categoria: "Celular", preco:7},
+                    { codigo: "91", nome: "Movicel", categoria: "Celular",preco:10 },
+                    { codigo: "222", nome: "AngolaTelecom", categoria: "Fixa",preco:4 }
                 ];
 
                 $scope.adicionarcontato = function (contato) {
@@ -66,6 +66,11 @@
                         return contato.selecionado;
                     });
                 };
+
+                $scope.ordenarPor=function (campo){
+                    $scope.VALOR_PARA_ORDENAR=campo; 
+                    $scope.SentidoOrdenar=!$scope.SentidoOrdenar;
+                }
 
                 $scope.add_classe_cor = "selecionado";
                 $scope.add_classe_negrito = "negrito";
@@ -91,18 +96,19 @@
          placeholder="Search.." class="form-control">
 
         <!-- table-stripe retirar para poder selecionar todos amarelos -->
-        <table class="table table-striped" ng-show="contatos.length>0">
+        <table class="table table-striped" ng-show="contatos.length > 0 ">
             <tr>
                 <th>Ativador</th>
-                <th>Nome</th>
-                <th>Telefone</th>
-                <th>Operadora</th>
+                <th> <a href="" ng-click="ordenarPor('nome')">Nome</a> </th>
+                <th> <a href="" ng-click="ordenarPor('telefone')">Telefone</a> </th>
+                <th> <a href="" ng-click="ordenarPor('operadora')">Operadora</a> </th>
                 <th>Cor Favorita</th>
                 <th>Data</th>
             </tr>
             <!--ng-class="[add_classe_cor,add_classe_negrito]" 
-                 -->
-            <tr ng-class="{'selecionado negrito': cnt.selecionado }" ng-repeat="cnt in contatos | filter: criteriodeBusca">
+                 ng-repeat="cnt in contatos | filter: {nome:criteriodeBusca}  -->
+            <tr ng-class="{'selecionado negrito': cnt.selecionado }"
+             ng-repeat="cnt in contatos | filter: criteriodeBusca | orderBy:VALOR_PARA_ORDENAR:SentidoOrdenar">
                 <td> <input type="checkbox" ng-model="cnt.selecionado" /> </td>
                 <td>{{cnt.nome}}</td>
                 <td>{{cnt.telefone}}</td>
@@ -110,7 +116,7 @@
                 <td>
                     <div class="basicos" ng-style="{'background-color' : cnt.cor}"></div>
                 </td>
-                <td>{{cnt.data | date: 'dd/MM/yyyy HH:MM' }}</td>
+                <td>{{cnt.data | date:'dd/MM/yyyy HH:MM' }}</td>
             </tr>
         </table>
         <hr>
@@ -124,7 +130,7 @@
                     class="form-control" ng-required="true" ng-pattern="/^\d{9,12}$/">
 
                 <select ng-model="contato.operadora" class="form-control"
-                    ng-options="opera.nome group by opera.categoria for opera in operadoras" id="">
+                    ng-options="opera.nome +' (' + (opera.preco | currency) + ')'  group by opera.categoria  for opera in operadoras | orderBy: 'nome' " id="">
                     <option value="">Selecione a Operadora</option>
                 </select>
             </form>
@@ -158,7 +164,6 @@
             <button ng-click="ApagarContatos(contatos)" ng-if="iscontatoSel(contatos)" class="btn btn-danger btn-block">
                 Eliminar Contacto</button>
         </div>
-
         <!-- adicionando elemento externo ng-include -->
         <div ng-include=" 'footer.html' "></div>
 
