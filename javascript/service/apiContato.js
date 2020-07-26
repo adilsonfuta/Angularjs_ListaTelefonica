@@ -8,9 +8,14 @@ app.factory('ContatosAPI', function ($http,Configuracao) {
         return   $http.post(Configuracao.baseURL+"/contatos", contato);
     };
 
+    const _removerContatoID=function (id){
+        return $http.delete(Configuracao.baseURL+"/contatos",id);
+    }
+
     return{
         getcontatos: _getcontatos,
-        saveContato:_saveContato
+        saveContato:_saveContato,
+        removerContatoID:_removerContatoID
     };
     
 }); 

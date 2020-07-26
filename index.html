@@ -16,11 +16,13 @@
     <script src="./javascript/service/apiOperadora.js"></script>
     <script src="./javascript/Values/configValue.js"></script>
     <script src="./javascript/service/serialGeneratorService.js"></script>
+    <script src="./javascript/filters/NameFilter.js"></script>
+    <script src="./javascript/filters/ellipsisFilter.js"></script>
     <script src="./lib/angular-messages.js"></script>
 
     <!--
         <script src="./javascript/config/serialGeneratorConfig.js"></script>
-     --> 
+     -->
 
 </head>
 
@@ -33,7 +35,7 @@
         <input id="procurarInfo" type="text" name="search" ng-model="criteriodeBusca" placeholder="Search.."
             class="form-control">
 
-            <ul>{{mensagem}}</ul>
+        <ul>{{mensagem}}</ul>
 
         <!-- table-stripe retirar para poder selecionar todos amarelos -->
         <table class="table table-striped" ng-show="contatos.length > 0 ">
@@ -52,7 +54,7 @@
                 ng-repeat=" cnt in contatos | filter: criteriodeBusca | orderBy:VALOR_PARA_ORDENAR:SentidoOrdenar | limitTo:20 ">
                 <td> <input type="checkbox" ng-model="cnt.selecionado" /> </td>
                 <td>{{cnt.serial}}</td>
-                <td>{{cnt.nome}}</td>
+                <td>{{cnt.nome| nameFilter | ellipsis:10}}</td>
                 <td>{{cnt.telefone}}</td>
                 <td>{{cnt.Operadora.nome}}</td>
                 <!--  <td>
@@ -104,9 +106,18 @@
             <button ng-click="adicionarcontato(contato)" ng-disabled="contatoForm.$invalid"
                 class="btn btn-primary btn-block"> Adicionar Contacto</button>
 
-            <button ng-click="ApagarContatos(contatos)" ng-if="iscontatoSel(contatos)" class="btn btn-danger btn-block">
+
+        <!--     <button ng-click="RemoverContato(contatos)" ng-if="iscontatoSel(contatos)" class="btn btn-danger btn-block">
                 Eliminar Contacto</button>
         </div>
+ -->
+          <button ng-click="ApagarContatos(contatos)" ng-if="iscontatoSel(contatos)" class="btn btn-danger btn-block">
+                      Eliminar Contacto</button>
+              </div>
+      
+
+
+        
         <!-- adicionando elemento externo ng-include -->
         <div ng-include=" 'View/footer.html' "></div>
 
@@ -114,7 +125,6 @@
 </body>
 
 </html>
-
 
 
 

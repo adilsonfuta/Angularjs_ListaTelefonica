@@ -47,6 +47,40 @@ app.controller("listaTelefonicaController", function ($scope, ContatosAPI,Servic
         });
     };
 
+    $scope.ApagarContatos2 = function (contatos) {
+        $scope.contatos = contatos.filter(function (contato) {
+            ContatosAPI.removerContatoID(contato.id).then(
+                function (response) {
+                    $scope.contatos = response.data;
+                     carregarContatos();  
+            },
+                function (response) {            
+                    $scope.mensagem = "Erro ao Remover ";
+                }) 
+            if (!contato.selecionado) return contato;
+        });
+    };
+
+    $scope.RemoverContato = function (contatos) {
+        let apagarELES=[];
+        $scope.contatos = contatos.filter(function (contato) {
+            if(contato.selecionado)
+                apagarELES.push(contato.id);
+                for(x in apagarELES){
+                    console.log(x);
+                     ContatosAPI.removerContatoID(x).then(
+                        function (response) {
+                            $scope.contatos = response.data;
+                             carregarContatos();  
+                    },
+                        function (response) {            
+                            $scope.mensagem = "Erro ao Remover ";
+                        }) 
+                }                    
+                 return contato;   
+        })
+    };
+
     $scope.iscontatoSel = function (contatos) {
         return contatos.some(function (contato) {
             return contato.selecionado;
