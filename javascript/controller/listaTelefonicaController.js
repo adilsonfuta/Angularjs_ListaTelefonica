@@ -1,5 +1,5 @@
       
-app.controller("listaTelefonicaController", function ($scope, $http) {
+app.controller("listaTelefonicaController", function ($scope, ContatosAPI,ServiceAPI) {
 
     $scope.info = " Lista Telefonica ";
     $scope.contatos = [];
@@ -7,22 +7,22 @@ app.controller("listaTelefonicaController", function ($scope, $http) {
     ];
 
     let carregarContatos = function () {
-        $http.get("http://localhost:3000/contatos").then(
+        ContatosAPI.getcontatos().then(
             function (response) {
                 $scope.contatos = response.data;
+                
             },
             function (response) {            
                 $scope.mensagem = "Aconteceu ALgo de Errado Nao consigo carregar nada ";
             }
         );
-
         // politica da mesma origem jsonp ou CORS (Cabecalho http)
-
+      //  console.log(baseURL.api);
     };
 
 
     let CarregarOperadoras = function () {
-        $http.get("http://localhost:3000/operadoras").then(
+       ServiceAPI.GetOperadora().then(
             function (response) {
                 $scope.operadoras = response.data;
             });
@@ -31,7 +31,7 @@ app.controller("listaTelefonicaController", function ($scope, $http) {
 
     $scope.adicionarcontato = function (contato) {
         contato.data = new Date();
-        $http.post("http://localhost:3000/contatos", contato).then(
+       ContatosAPI.saveContato(contato).then(
             function (response) {
                 delete $scope.contato;
                 $scope.contatoForm.$setPristine();

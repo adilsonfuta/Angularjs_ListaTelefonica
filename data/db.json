@@ -1,0 +1,191 @@
+{
+    "contatos": [
+      {
+        "id": 1,
+        "nome": "Adilson",
+        "telefone": 932392875,
+        "data": "19/07/2020",
+        "Operadora": {
+          "nome": "Unitel",
+          "codigo": 93,
+          "categoria": "Celular"
+        }
+      },
+      {
+        "nome": "Inês Ruth Futa",
+        "telefone": 912347811,
+        "data": "12/07/2011",
+        "Operadora": {
+          "nome": "Unitel",
+          "codigo": 93,
+          "categoria": "Celular"
+        },
+        "id": 2
+      },
+      {
+        "id": 3,
+        "nome": "Geraldo",
+        "telefone": 222473626,
+        "data": "17/11/2014",
+        "Operadora": {
+          "nome": "movicel",
+          "codigo": 222,
+          "categoria": "Fixo"
+        }
+      },
+      {
+        "id": 4,
+        "nome": "Miguel",
+        "telefone": 911398785,
+        "data": "31/12/2002",
+        "Operadora": {
+          "nome": "movicel",
+          "codigo": 99,
+          "categoria": "Celular"
+        }
+      },
+      {
+        "nome": "Futa",
+        "telefone": 912347800,
+        "data": "19/07/2020",
+        "Operadora": {
+          "nome": "movicel",
+          "codigo": 91,
+          "categoria": "Celular"
+        },
+        "id": 5
+      },
+      {
+        "nome": "Joao Doe Pedro",
+        "telefone": 912347811,
+        "data": "24/07/2020",
+        "Operadora": {
+          "nome": "Unitel",
+          "codigo": 93,
+          "categoria": "Celular"
+        },
+        "id": 6
+      },
+      {
+        "nome": "Mingao Domigos",
+        "telefone": 912347800,
+        "data": "24/07/2020",
+        "Operadora": {
+          "nome": "Unitel",
+          "codigo": 93,
+          "categoria": "Celular"
+        },
+        "id": 7
+      },
+      {
+        "nome": "Mingao Domigos",
+        "telefone": 912347800,
+        "data": "24/07/2020",
+        "Operadora": {
+          "nome": "Unitel",
+          "codigo": 93,
+          "categoria": "Celular"
+        },
+        "id": 8
+      },
+      {
+        "nome": "Mingao Domigos",
+        "telefone": 912347800,
+        "data": "24/07/2020",
+        "Operadora": {
+          "nome": "Unitel",
+          "codigo": 93,
+          "categoria": "Celular"
+        },
+        "id": 9
+      },
+      {
+        "nome": "Mingao Domigos",
+        "telefone": 912347800,
+        "data": "24/07/2020",
+        "Operadora": {
+          "nome": "Unitel",
+          "codigo": 93,
+          "categoria": "Celular"
+        },
+        "id": 10
+      },
+      {
+        "nome": "Mingao Domigos",
+        "telefone": 912347800,
+        "data": "24/07/2020",
+        "Operadora": {
+          "nome": "Unitel",
+          "codigo": 93,
+          "categoria": "Celular"
+        },
+        "id": 11
+      },
+      {
+        "nome": "Mingao Domigos",
+        "telefone": 912347800,
+        "data": "24/07/2020",
+        "Operadora": {
+          "nome": "Unitel",
+          "codigo": 93,
+          "categoria": "Celular"
+        },
+        "id": 12
+      },
+      {
+        "nome": "Domigos jota",
+        "telefone": 222347800,
+        "data": "20/07/2020",
+        "Operadora": {
+          "nome": "AngolaTelecom",
+          "codigo": 93,
+          "categoria": "Fixo"
+        },
+        "id": 13
+      },
+      {
+        "nome": "TESTAR DADOS",
+        "telefone": 22256432123,
+        "Operadora": {
+          "codigo": 3,
+          "nome": "AngolaTelecom",
+          "categoria": "Fixa",
+          "preco": 4
+        },
+        "data": "2020-07-25T20:25:33.758Z",
+        "id": 14
+      },
+      {
+        "nome": "ESTA tudo bem ate aqui",
+        "telefone": 244932451234,
+        "Operadora": {
+          "codigo": 1,
+          "nome": "Unitel",
+          "categoria": "Celular",
+          "preco": 7
+        },
+        "data": "2020-07-25T23:10:14.426Z",
+        "id": 15
+      }
+    ],
+    "operadoras": [
+      {
+        "codigo": 1,
+        "nome": "Unitel",
+        "categoria": "Celular",
+        "preco": 7
+      },
+      {
+        "codigo": 2,
+        "nome": "Movicel",
+        "categoria": "Celular",
+        "preco": 10
+      },
+      {
+        "codigo": 3,
+        "nome": "AngolaTelecom",
+        "categoria": "Fixa",
+        "preco": 4
+      }
+    ]
+  }

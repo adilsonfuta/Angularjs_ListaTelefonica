@@ -12,6 +12,9 @@
     <script src="./lib/angular.js"></script>
     <script src="./javascript/app.js"></script>
     <script src="./javascript/controller/listaTelefonicaController.js"></script>
+    <script src="./javascript/service/apiContato.js"></script>
+    <script src="./javascript/service/apiOperadora.js"></script>
+    <script src="./javascript/Config/configValue.js"></script>
     <script src="./lib/angular-messages.js"></script>
 
 
@@ -33,6 +36,7 @@
         <table class="table table-striped" ng-show="contatos.length > 0 ">
             <tr>
                 <th>Ativador</th>
+                <th>Serial</th>
                 <th> <a href="" ng-click="ordenarPor('nome')">Nome</a> </th>
                 <th> <a href="" ng-click="ordenarPor('telefone')">Telefone</a> </th>
                 <th> <a href="" ng-click="ordenarPor('operadora')">Operadora</a> </th>
@@ -44,6 +48,7 @@
             <tr ng-class="{'selecionado negrito': cnt.selecionado }"
                 ng-repeat=" cnt in contatos | filter: criteriodeBusca | orderBy:VALOR_PARA_ORDENAR:SentidoOrdenar | limitTo:20 ">
                 <td> <input type="checkbox" ng-model="cnt.selecionado" /> </td>
+                <td>{{cnt.serial}}</td>
                 <td>{{cnt.nome}}</td>
                 <td>{{cnt.telefone}}</td>
                 <td>{{cnt.Operadora.nome}}</td>
