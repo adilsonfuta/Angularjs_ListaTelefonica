@@ -13,7 +13,7 @@ app.controller("listaTelefonicaController", function ($scope, ContatosAPI,Servic
                 $scope.contatos = response.data;                
             },
             function (response) {            
-                $scope.mensagem = "Ops :) Não foi Possivel Carregar os Dados!";
+                $scope.mensagemError = "Ops :) Não foi Possivel Carregar os Dados!";
             }
         );
         // politica da mesma origem jsonp ou CORS (Cabecalho http)
@@ -54,7 +54,7 @@ app.controller("listaTelefonicaController", function ($scope, ContatosAPI,Servic
                      carregarContatos();  
             },
                 function (response) {            
-                    $scope.mensagem = "Erro ao Remover ";
+                    $scope.mensagemError = "Erro ao Remover ";
                 }) 
             if (!contato.selecionado) return contato;
         });
@@ -73,7 +73,7 @@ app.controller("listaTelefonicaController", function ($scope, ContatosAPI,Servic
                              carregarContatos();  
                     },
                         function (response) {            
-                            $scope.mensagem = "Erro ao Remover ";
+                            $scope.mensagemError = "Erro ao Remover ";
                         }) 
                 }                    
                  return contato;   

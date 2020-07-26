@@ -4,7 +4,8 @@ app.directive('uiAlert', function(){
         replace:true,
         restrict:"AE",
         scope:{
-            topic:"@topic",
+            topic: "@title",
+            mensagemError: "=message" 
         }
-    };
+    }; 
 });

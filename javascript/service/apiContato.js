@@ -1,7 +1,7 @@
 
 app.factory('ContatosAPI', function ($http,Configuracao) {
     const _getcontatos=function(){
-        return  $http.get(Configuracao.baseURL+"/contatos2");
+        return  $http.get(Configuracao.baseURL+"/contatos");
     };
 
     const _saveContato=function(contato){
