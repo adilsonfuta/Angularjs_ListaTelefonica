@@ -70,4 +70,25 @@ input[type=text]#procurarInfo {
     background-position: 10px 10px; 
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+.ui-alert{
+    background: #f2dede;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.ui-alert-title{
+    color: #af4341;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.ui-alert-message{
+    color: #af4341;
 }

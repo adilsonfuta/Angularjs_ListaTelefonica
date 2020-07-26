@@ -10,11 +10,10 @@ app.controller("listaTelefonicaController", function ($scope, ContatosAPI,Servic
     let carregarContatos = function () {
         ContatosAPI.getcontatos().then(
             function (response) {
-                $scope.contatos = response.data;
-                
+                $scope.contatos = response.data;                
             },
             function (response) {            
-                $scope.mensagem = "Aconteceu ALgo de Errado Nao consigo carregar nada ";
+                $scope.mensagem = "Ops :) Não foi Possivel Carregar os Dados!";
             }
         );
         // politica da mesma origem jsonp ou CORS (Cabecalho http)
