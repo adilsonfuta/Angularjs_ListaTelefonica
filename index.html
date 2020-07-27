@@ -19,6 +19,7 @@
     <script src="./javascript/filters/NameFilter.js"></script>
     <script src="./javascript/filters/ellipsisFilter.js"></script>
     <script src="./javascript/directives/uiAlertDirective.js"></script>
+    <script src="./javascript/directives/uiDateDirective.js"></script>
     <script src="./lib/angular-messages.js"></script>
 
     <!--
@@ -76,6 +77,9 @@
                     ng-required="true" ng-minlength="10">
                 <input type="number" ng-model="contato.telefone" name="telefoneInp" placeholder="Digite Telefone"
                     class="form-control" ng-required="true" ng-pattern="/^\d{9,12}$/">
+                    
+                <input type="text" name="data" id="" class="form-control" ng-model="contato.data" 
+                placeholder="Digite a sua data"  ui-date/>
 
                 <select ng-model="contato.Operadora" class="form-control"
                     ng-options="opera.nome +' (' + (opera.preco | currency) + ')'  group by opera.categoria  for opera in operadoras | orderBy: 'nome' "
