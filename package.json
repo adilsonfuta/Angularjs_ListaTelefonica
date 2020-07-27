@@ -8,9 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "json-server --watch data/db.json "
+    "server": "json-server -p 3333 -d 1000 data/Server.json"
   },
   "repository": {
+    
     "type": "git",
     "url": "git+https://github.com/adilsonfuta/Angularjs_ListaTelefonica.git"
   },

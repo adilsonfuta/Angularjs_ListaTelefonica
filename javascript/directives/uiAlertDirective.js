@@ -5,7 +5,8 @@ app.directive('uiAlert', function(){
         restrict:"AE",
         scope:{
             topic: "@title",
-            mensagemError: "=message" 
-        }
+           // mensagemError: "=message" 
+        }, 
+        transclude:true
     }; 
 });
